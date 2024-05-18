@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://cm40civqh75tk"]
+
+[ext_resource type="Texture2D" uid="uid://bbm1fg680vtwh" path="res://textures/terrain/city/galletcity.png" id="1_hglq1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1fbw0"]
+atlas = ExtResource("1_hglq1")
+region = Rect2(56, 282, 48, 70)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1fbw0")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]

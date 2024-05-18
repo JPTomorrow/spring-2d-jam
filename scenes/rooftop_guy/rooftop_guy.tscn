@@ -1,0 +1,98 @@
+[gd_scene load_steps=12 format=3 uid="uid://kp8f2gj2kewj"]
+
+[ext_resource type="Texture2D" uid="uid://b54cea7bo5631" path="res://textures/characters/old_man/32x32.png" id="1_0y7ox"]
+[ext_resource type="Texture2D" uid="uid://dgh54glyjaw68" path="res://textures/characters/gun.png" id="2_no7nk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kmu83"]
+atlas = ExtResource("1_0y7ox")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v6m01"]
+atlas = ExtResource("1_0y7ox")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xs0gk"]
+atlas = ExtResource("1_0y7ox")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lebyb"]
+atlas = ExtResource("1_0y7ox")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2k6ht"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kmu83")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v6m01")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xs0gk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lebyb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xs0gk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v6m01")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kmu83")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ddh2u"]
+atlas = ExtResource("2_no7nk")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m24xt"]
+atlas = ExtResource("2_no7nk")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pfydi"]
+atlas = ExtResource("2_no7nk")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_15pfn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ddh2u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m24xt")
+}],
+"loop": true,
+"name": &"fire",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfydi")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="rooftop_guy" type="AnimatedSprite2D"]
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_2k6ht")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.569694
+
+[node name="gun" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 6.66667)
+scale = Vector2(1.16667, 1.16667)
+sprite_frames = SubResource("SpriteFrames_15pfn")
+animation = &"idle"
+frame_progress = 0.852817
+offset = Vector2(3.42856, 2.86102e-06)

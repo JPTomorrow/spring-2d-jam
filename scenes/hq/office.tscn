@@ -1,0 +1,98 @@
+[gd_scene load_steps=9 format=3 uid="uid://u8lb0fxjtd07"]
+
+[ext_resource type="Script" path="res://scenes/hq/Building.cs" id="2_7q4cr"]
+[ext_resource type="SpriteFrames" uid="uid://cm40civqh75tk" path="res://scenes/hq/office_frames.tres" id="2_wqd6q"]
+[ext_resource type="FontFile" uid="uid://c1q8mntmqr1r0" path="res://font/arcade_ya/ARCADE_N.TTF" id="3_43ejy"]
+[ext_resource type="PackedScene" uid="uid://kp8f2gj2kewj" path="res://scenes/rooftop_guy/rooftop_guy.tscn" id="3_cn180"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cnmea"]
+size = Vector2(47.9893, 70.0125)
+
+[sub_resource type="Animation" id="Animation_4l50j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-11.9973, -42.1213)]
+}
+
+[sub_resource type="Animation" id="Animation_bxxxw"]
+resource_name = "bob"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-15.4251, -51.2286), Vector2(-14.8538, -47.8134), Vector2(-15.4251, -51.2286)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fq7q6"]
+_data = {
+"RESET": SubResource("Animation_4l50j"),
+"bob": SubResource("Animation_bxxxw")
+}
+
+[node name="building" type="AnimatedSprite2D"]
+texture_filter = 1
+position = Vector2(3, 32)
+scale = Vector2(1.75039, 1.75683)
+sprite_frames = ExtResource("2_wqd6q")
+animation = &"idle"
+offset = Vector2(1, -44)
+script = ExtResource("2_7q4cr")
+
+[node name="collision" type="StaticBody2D" parent="."]
+
+[node name="shape" type="CollisionShape2D" parent="collision"]
+position = Vector2(1.7139, -43.5443)
+shape = SubResource("RectangleShape2D_cnmea")
+
+[node name="1" parent="." instance=ExtResource("3_cn180")]
+position = Vector2(-6.28431, -64.3204)
+scale = Vector2(0.428476, 0.426905)
+
+[node name="2" parent="." instance=ExtResource("3_cn180")]
+position = Vector2(-9.14082, -77.4122)
+scale = Vector2(0.428476, 0.426905)
+
+[node name="3" parent="." instance=ExtResource("3_cn180")]
+position = Vector2(11.9973, -77.9814)
+scale = Vector2(0.428476, 0.426905)
+
+[node name="4" parent="." instance=ExtResource("3_cn180")]
+position = Vector2(9.71212, -64.3204)
+scale = Vector2(0.428476, 0.426905)
+
+[node name="text" type="RichTextLabel" parent="."]
+texture_filter = 1
+offset_left = -11.9973
+offset_top = -42.1213
+offset_right = 24.0027
+offset_bottom = -33.1213
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.756863)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/normal_font = ExtResource("3_43ejy")
+theme_override_font_sizes/normal_font_size = 6
+bbcode_enabled = true
+text = "[center]Office[/center]"
+
+[node name="anims" type="AnimationPlayer" parent="text"]
+libraries = {
+"": SubResource("AnimationLibrary_fq7q6")
+}
+autoplay = "bob"

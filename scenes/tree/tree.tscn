@@ -1,0 +1,85 @@
+[gd_scene load_steps=7 format=3 uid="uid://b4n5y3m77y2aw"]
+
+[ext_resource type="Script" path="res://scenes/tree/tree.cs" id="1_2ivue"]
+[ext_resource type="SpriteFrames" uid="uid://c0ghyb648d68b" path="res://scenes/tree/tree1_frames.tres" id="1_ug4gj"]
+
+[sub_resource type="Animation" id="Animation_66s2e"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(16.2181, -2.70302), Vector2(-58.1149, 36.4908)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.247837, -1.5708]
+}
+
+[sub_resource type="Animation" id="Animation_d1s5n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h5e4m"]
+_data = {
+"RESET": SubResource("Animation_d1s5n"),
+"die": SubResource("Animation_66s2e")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ekbew"]
+height = 100.012
+
+[node name="tree" type="CharacterBody2D"]
+scale = Vector2(0.739913, 0.739913)
+motion_mode = 1
+script = ExtResource("1_2ivue")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("1_ug4gj")
+animation = &"idle"
+
+[node name="anims" type="AnimationPlayer" parent="sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_h5e4m")
+}
+
+[node name="shape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -9.46057)
+shape = SubResource("CapsuleShape2D_ekbew")
