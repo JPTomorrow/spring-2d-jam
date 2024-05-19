@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://u8lb0fxjtd07"]
+[gd_scene load_steps=20 format=3 uid="uid://u8lb0fxjtd07"]
 
 [ext_resource type="Script" path="res://scenes/hq/Building.cs" id="2_7q4cr"]
 [ext_resource type="SpriteFrames" uid="uid://cm40civqh75tk" path="res://scenes/hq/office_frames.tres" id="2_wqd6q"]
@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ctthypvt3odqs" path="res://textures/fx/Fire+Sparks-Sheet.png" id="5_1y46l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cnmea"]
-size = Vector2(47.9893, 70.0125)
+size = Vector2(47.9893, 46.675)
 
 [sub_resource type="Animation" id="Animation_4l50j"]
 length = 0.001
@@ -101,6 +101,9 @@ particles_anim_loop = true
 [sub_resource type="Gradient" id="Gradient_2rmrd"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_gfxac"]
+radius = 50.2874
+
 [node name="building" type="AnimatedSprite2D"]
 texture_filter = 1
 position = Vector2(2, 15)
@@ -111,11 +114,10 @@ offset = Vector2(1.5713, -34.3235)
 script = ExtResource("2_7q4cr")
 
 [node name="collision" type="StaticBody2D" parent="."]
-collision_layer = 3
-collision_mask = 15
+collision_mask = 14
 
 [node name="shape" type="CollisionShape2D" parent="collision"]
-position = Vector2(1.7139, -43.5443)
+position = Vector2(1.7139, -25.0451)
 shape = SubResource("RectangleShape2D_cnmea")
 
 [node name="rtg1" parent="." instance=ExtResource("3_cn180")]
@@ -166,6 +168,8 @@ theme_override_styles/grabber_area = SubResource("StyleBoxLine_ettsp")
 value = 100.0
 
 [node name="no_build_area" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 11
 
 [node name="shape" type="CollisionShape2D" parent="no_build_area"]
 position = Vector2(1.42825, -37.5677)
@@ -193,5 +197,18 @@ scale_amount_min = 0.2
 scale_amount_max = 0.7
 color_ramp = SubResource("Gradient_2rmrd")
 
+[node name="item_spawn_timer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
+
+[node name="upgrade_area" type="Area2D" parent="."]
+position = Vector2(0, -32.4448)
+collision_layer = 0
+
+[node name="shape" type="CollisionShape2D" parent="upgrade_area"]
+shape = SubResource("CircleShape2D_gfxac")
+
 [connection signal="body_entered" from="no_build_area" to="." method="onNoBuildEntered"]
 [connection signal="body_exited" from="no_build_area" to="." method="onNoBuildExited"]
+[connection signal="body_entered" from="upgrade_area" to="." method="onUpgradeEntered"]
+[connection signal="body_exited" from="upgrade_area" to="." method="onUpgradeEntered"]

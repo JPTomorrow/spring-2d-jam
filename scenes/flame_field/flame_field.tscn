@@ -1,0 +1,85 @@
+[gd_scene load_steps=4 format=3 uid="uid://da8rpweo81p50"]
+
+[ext_resource type="Script" path="res://scenes/flame_field/FlameField.cs" id="1_t1uu8"]
+[ext_resource type="PackedScene" uid="uid://djy02ura4jl3y" path="res://scenes/flame/flame.tscn" id="2_323id"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xuf8d"]
+radius = 108.167
+
+[node name="flame_field" type="Area2D"]
+collision_layer = 9
+collision_mask = 9
+script = ExtResource("1_t1uu8")
+
+[node name="shape" type="CollisionShape2D" parent="."]
+scale = Vector2(1, 0.64)
+shape = SubResource("CircleShape2D_xuf8d")
+
+[node name="flame" parent="." instance=ExtResource("2_323id")]
+position = Vector2(-1, -102)
+
+[node name="flame2" parent="." instance=ExtResource("2_323id")]
+position = Vector2(-41, -86)
+
+[node name="flame3" parent="." instance=ExtResource("2_323id")]
+position = Vector2(-57, -68)
+
+[node name="flame4" parent="." instance=ExtResource("2_323id")]
+position = Vector2(-81, -86)
+
+[node name="flame5" parent="." instance=ExtResource("2_323id")]
+position = Vector2(-11, -51)
+
+[node name="flame6" parent="." instance=ExtResource("2_323id")]
+position = Vector2(-51, -35)
+
+[node name="flame7" parent="." instance=ExtResource("2_323id")]
+position = Vector2(-67, -17)
+
+[node name="flame8" parent="." instance=ExtResource("2_323id")]
+position = Vector2(-91, -35)
+
+[node name="flame9" parent="." instance=ExtResource("2_323id")]
+position = Vector2(100, -87)
+
+[node name="flame10" parent="." instance=ExtResource("2_323id")]
+position = Vector2(60, -71)
+
+[node name="flame11" parent="." instance=ExtResource("2_323id")]
+position = Vector2(44, -53)
+
+[node name="flame12" parent="." instance=ExtResource("2_323id")]
+position = Vector2(20, -71)
+
+[node name="flame13" parent="." instance=ExtResource("2_323id")]
+position = Vector2(99, -29)
+
+[node name="flame14" parent="." instance=ExtResource("2_323id")]
+position = Vector2(59, -13)
+
+[node name="flame15" parent="." instance=ExtResource("2_323id")]
+position = Vector2(64, 22)
+
+[node name="flame16" parent="." instance=ExtResource("2_323id")]
+position = Vector2(25, -17)
+
+[node name="flame17" parent="." instance=ExtResource("2_323id")]
+position = Vector2(2, 3)
+
+[node name="flame18" parent="." instance=ExtResource("2_323id")]
+position = Vector2(-38, 19)
+
+[node name="flame19" parent="." instance=ExtResource("2_323id")]
+position = Vector2(-14, 34)
+
+[node name="flame20" parent="." instance=ExtResource("2_323id")]
+position = Vector2(-100, 8)
+
+[node name="burn_tick" type="Timer" parent="."]
+process_callback = 0
+autostart = true
+
+[node name="lifetime_timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true

@@ -1,38 +1,41 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Net;
 
 public partial class Spawner : PathFollow2D
 {
 	private PackedScene treePrefab;
-	private Timer spawnTimer;
 	private float speed = 1f;
-	private List<tree> spawnedTrees = new List<tree>();
-
-	public static int spawnLimit = 10;
+	public static int currentWaveLimit = 5;
+	public static int TreesSpawned = 0;
 
 	public override void _Ready()
 	{
 		speed = (float)GD.RandRange(1f, 3f);
 		treePrefab = GD.Load<PackedScene>("res://scenes/tree/tree.tscn");
-		spawnTimer = new Timer();
-		spawnTimer.Timeout += spawn;
-		spawnTimer.WaitTime = GD.RandRange(1.0f, 3.0f);
-		spawnTimer.OneShot = false;
-		spawnTimer.Autostart = true;
-		AddChild(spawnTimer);
+
 	}
 
-	private void spawn()
+	public void SpawnTree()
 	{
+		if (TreesSpawned >= currentWaveLimit)
+			return;
 		var enemy = treePrefab.Instantiate<tree>();
 		enemy.GlobalPosition = GlobalPosition;
+		var randScale = (float)GD.RandRange(0.4f, 1.0f);
+		enemy.Scale = new Vector2(randScale, randScale);
 		GetTree().Root.GetNode("main").AddChild(enemy);
+		TreesSpawned++;
 	}
 
 	public override void _Process(double delta)
 	{
 		// Move the PathFollow2D along the path.
 		ProgressRatio += speed;
+		if (TreesSpawned < currentWaveLimit)
+		{
+			SpawnTree();
+		}
 	}
 }

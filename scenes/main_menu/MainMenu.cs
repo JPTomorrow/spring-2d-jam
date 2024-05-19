@@ -14,6 +14,8 @@ public partial class MainMenu : Control
 
 	private void onPlayPressed()
 	{
+		GameState.TreesKilled = 0;
+		Spawner.TreesSpawned = 0;
 		GetTree().ChangeSceneToFile("res://scenes/main_world/main.tscn");
 	}
 

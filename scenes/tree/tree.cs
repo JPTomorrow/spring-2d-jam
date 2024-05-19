@@ -2,11 +2,12 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 
 public partial class tree : CharacterBody2D
 {
 	private AnimatedSprite2D sprite;
-	public const float Speed = 50.0f;
+	public const float Speed = 30.0f;
 	private HSlider healthBar;
 	private bool isFlashing = false;
 	private bool isAttacking = false;
@@ -17,6 +18,8 @@ public partial class tree : CharacterBody2D
 		get => health;
 		set
 		{
+			if (health <= 0)
+				return;
 			if (!isFlashing && value < health)
 				hitFlash();
 
@@ -36,25 +39,28 @@ public partial class tree : CharacterBody2D
 
 	public override void _Ready()
 	{
+
+		player = GetTree().Root.GetNode<CharacterBody2D>("main/joe");
+		hq = GetTree().Root.GetNode<AnimatedSprite2D>("main/hq");
 		sprite = GetNode<AnimatedSprite2D>("sprite");
 		healthBar = GetNode<HSlider>("health_bar");
 		healthBar.Hide();
 	}
 
 
+	private CharacterBody2D player;
+	private AnimatedSprite2D hq;
 	public override void _PhysicsProcess(double delta)
 	{
-		if (Health <= 0)
+		if (isAttacking || Health <= 0 || !IsInstanceValid(player) || !IsInstanceValid(hq))
 			return;
 
 		Vector2 velocity = Velocity;
 
-		var p = GetTree().Root.GetNode<CharacterBody2D>("main/joe");
-		var hq = GetTree().Root.GetNode<AnimatedSprite2D>("main/hq");
 		Vector2 direction;
 
-		if (GlobalPosition.DistanceTo(p.GlobalPosition) < GlobalPosition.DistanceTo(hq.GlobalPosition))
-			direction = (p.GlobalPosition - GlobalPosition).Normalized();
+		if (GlobalPosition.DistanceTo(player.GlobalPosition) < GlobalPosition.DistanceTo(hq.GlobalPosition))
+			direction = (player.GlobalPosition - GlobalPosition).Normalized();
 		else
 			direction = (hq.GlobalPosition - GlobalPosition).Normalized();
 
@@ -67,6 +73,8 @@ public partial class tree : CharacterBody2D
 
 	public async void Attack()
 	{
+		if (Health <= 0)
+			return;
 		var anims = sprite.GetNode<AnimationPlayer>("anims");
 		anims.Play("attack");
 		await ToSignal(anims, "animation_finished");
@@ -81,9 +89,9 @@ public partial class tree : CharacterBody2D
 				{
 					((Joe)target).Health -= 10;
 				}
-				else if (target is Building)
+				else if (target is StaticBody2D)
 				{
-					((Building)target).Health -= 10;
+					((Building)target.GetParent()).Health -= 10;
 				}
 			}
 
@@ -101,6 +109,7 @@ public partial class tree : CharacterBody2D
 		SetCollisionLayerValue(1, false);
 		SetCollisionLayerValue(2, false);
 		GameState.TreesKilled++;
+		Spawner.TreesSpawned--;
 		var anims = sprite.GetNode<AnimationPlayer>("anims");
 		anims.Play("die");
 		await ToSignal(anims, "animation_finished");
@@ -132,20 +141,24 @@ public partial class tree : CharacterBody2D
 		isFlashing = false;
 	}
 
-	private void onAtkRangeEntered(Node2D body)
+	private void onAtkRangeEntered(Node body)
 	{
-		targetsInAttackRadius.Add(body);
-		if (!isAttacking && (body is Joe || body is Building))
+		if (!isAttacking && (body is Joe || body is StaticBody2D) && !body.Name.ToString().Contains("border_blocker"))
 		{
+			GD.Print("attacking");
+			targetsInAttackRadius.Add(body);
 			// attack
 			isAttacking = true;
 			Attack();
 		}
 	}
-	private void onAtkRangeExited(Node2D body)
+	private void onAtkRangeExited(Node body)
 	{
+
 		if (targetsInAttackRadius.Contains(body))
 		{
+			GD.Print("not attacking");
+
 			targetsInAttackRadius.Remove(body);
 		}
 		if (!targetsInAttackRadius.Any())

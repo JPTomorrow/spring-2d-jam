@@ -169,7 +169,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ekbew"]
-height = 54.0604
+height = 97.3087
 
 [sub_resource type="Texture2DRD" id="Texture2DRD_rjd68"]
 
@@ -184,7 +184,7 @@ radius = 72.9949
 [node name="tree" type="CharacterBody2D"]
 scale = Vector2(0.739913, 0.739913)
 collision_layer = 8
-collision_mask = 10
+collision_mask = 24
 motion_mode = 1
 script = ExtResource("1_2ivue")
 
@@ -206,7 +206,7 @@ frame = 11
 frame_progress = 1.0
 
 [node name="shape" type="CollisionShape2D" parent="."]
-position = Vector2(0, 35.1393)
+position = Vector2(0, 2.70302)
 shape = SubResource("CapsuleShape2D_ekbew")
 
 [node name="health_bar" type="HSlider" parent="."]
@@ -220,6 +220,9 @@ theme_override_styles/grabber_area = SubResource("StyleBoxLine_bj375")
 value = 100.0
 
 [node name="attack_range" type="Area2D" parent="."]
+position = Vector2(2.70302, -14.8666)
+collision_layer = 15
+collision_mask = 15
 
 [node name="shape" type="CollisionShape2D" parent="attack_range"]
 position = Vector2(-1.35151, 58.1149)

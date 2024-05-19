@@ -102,10 +102,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0.518633, 0.288944, 1)
+color = Color(4.9334e-07, 0.406627, 0.151319, 1)
 
 [node name="sprite2" type="AnimatedSprite2D" parent="."]
-position = Vector2(457, 180)
+position = Vector2(438.276, 160.525)
 rotation = -0.469438
 scale = Vector2(2.29662, 2.29662)
 sprite_frames = ExtResource("2_fr6oe")
@@ -141,26 +141,8 @@ bbcode_enabled = true
 text = "AND THE GREEN SOLUTION"
 fit_content = true
 
-[node name="instructions" type="RichTextLabel" parent="."]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 48.0
-offset_top = -23.0
-offset_right = 482.0
-offset_bottom = 46.0
-grow_vertical = 2
-theme_override_constants/line_separation = 10
-theme_override_font_sizes/normal_font_size = 12
-bbcode_enabled = true
-text = "WASD: Move
-SPACE (hold): PLACE BUILDINGS
-LMB: THROW MOLITOV"
-fit_content = true
-
 [node name="sprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(555, 208)
+position = Vector2(536.276, 188.525)
 scale = Vector2(7.1875, 7.1875)
 sprite_frames = SubResource("SpriteFrames_1gws5")
 animation = &"move"
