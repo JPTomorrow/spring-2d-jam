@@ -7,6 +7,7 @@ public partial class Joe : CharacterBody2D
 	private Building officePlacementModel;
 	public const float Speed = 200.0f;
 	private AnimatedSprite2D sprite;
+	public bool CanBuild = true;
 	public int health = 100;
 	public int Health
 	{
@@ -41,6 +42,9 @@ public partial class Joe : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (Health <= 0)
+			return;
+
 		Vector2 velocity = Velocity;
 
 		// Get the input direction and handle the movement/deceleration.
@@ -75,6 +79,12 @@ public partial class Joe : CharacterBody2D
 		if (Input.IsActionJustReleased("interact"))
 		{
 			officePlacementModel.Hide();
+			if (CanBuild)
+			{
+				var placed = officePrefab.Instantiate<Building>();
+				placed.Position = officePlacementModel.Position;
+				GetTree().Root.AddChild(placed);
+			}
 			officePlacementModel.Position = placementResetPos;
 			isBuildMode = false;
 		}
@@ -86,7 +96,7 @@ public partial class Joe : CharacterBody2D
 			officePlacementModel.Show();
 		var r = buildRange;
 		if (direction.Y >= 0f)
-			r *= 2f;
+			r *= 3.0f;
 		else
 			r *= 0.5f;
 		officePlacementModel.GlobalPosition = GlobalPosition + direction * r;
@@ -98,5 +108,6 @@ public partial class Joe : CharacterBody2D
 		var timer = GetTree().CreateTimer(3f);
 		await ToSignal(timer, "timeout");
 		// load main menu
+		GetTree().ChangeSceneToFile("res://scenes/main_menu/main_menu.tscn");
 	}
 }

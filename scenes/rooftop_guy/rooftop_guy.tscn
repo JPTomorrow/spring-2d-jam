@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://kp8f2gj2kewj"]
+[gd_scene load_steps=14 format=3 uid="uid://kp8f2gj2kewj"]
 
 [ext_resource type="Texture2D" uid="uid://b54cea7bo5631" path="res://textures/characters/old_man/32x32.png" id="1_0y7ox"]
 [ext_resource type="Texture2D" uid="uid://dgh54glyjaw68" path="res://textures/characters/gun.png" id="2_no7nk"]
+[ext_resource type="Script" path="res://scenes/rooftop_guy/RoofTopGuy.cs" id="2_ohodg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kmu83"]
 atlas = ExtResource("1_0y7ox")
@@ -69,7 +70,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_m24xt")
 }],
-"loop": true,
+"loop": false,
 "name": &"fire",
 "speed": 8.0
 }, {
@@ -82,17 +83,37 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_sriar"]
+radius = 266.77
+
 [node name="rooftop_guy" type="AnimatedSprite2D"]
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_2k6ht")
 animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.569694
+script = ExtResource("2_ohodg")
 
 [node name="gun" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 6.66667)
 scale = Vector2(1.16667, 1.16667)
 sprite_frames = SubResource("SpriteFrames_15pfn")
 animation = &"idle"
-frame_progress = 0.852817
 offset = Vector2(3.42856, 2.86102e-06)
+
+[node name="muzzle_pos" type="Node2D" parent="gun"]
+position = Vector2(20.5714, -2.74181e-06)
+
+[node name="target_range" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="target_range"]
+shape = SubResource("CircleShape2D_sriar")
+debug_color = Color(0, 0.65098, 0.0901961, 0.0509804)
+
+[node name="fire_cooldown" type="Timer" parent="."]
+autostart = true
+
+[connection signal="body_entered" from="target_range" to="." method="onTargetRangeEntered"]
+[connection signal="body_exited" from="target_range" to="." method="onTargetRangeExited"]

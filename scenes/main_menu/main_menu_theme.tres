@@ -1,0 +1,29 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://bov1r1kgnfp4l"]
+
+[ext_resource type="FontFile" uid="uid://c1q8mntmqr1r0" path="res://font/arcade_ya/ARCADE_N.TTF" id="1_1aci4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vguab"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sh83f"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0707b"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1twjl"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[resource]
+Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+Button/colors/font_hover_color = Color(4.13924e-06, 0.795588, 0.427576, 1)
+Button/fonts/font = ExtResource("1_1aci4")
+Button/styles/disabled = SubResource("StyleBoxFlat_vguab")
+Button/styles/focus = SubResource("StyleBoxFlat_sh83f")
+Button/styles/hover = SubResource("StyleBoxFlat_0707b")
+Button/styles/normal = SubResource("StyleBoxFlat_0707b")
+Button/styles/pressed = SubResource("StyleBoxFlat_1twjl")
+RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 1)
+RichTextLabel/constants/shadow_offset_x = 3
+RichTextLabel/constants/shadow_offset_y = 3
+RichTextLabel/fonts/normal_font = ExtResource("1_1aci4")

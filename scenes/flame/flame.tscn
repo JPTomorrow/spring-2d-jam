@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://djy02ura4jl3y"]
+
+[ext_resource type="SpriteFrames" uid="uid://bth1na6dshlur" path="res://scenes/flame/flame_frames.tres" id="1_q4kb6"]
+
+[node name="flame" type="AnimatedSprite2D"]
+sprite_frames = ExtResource("1_q4kb6")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.471976

@@ -1,0 +1,199 @@
+[gd_scene load_steps=14 format=3 uid="uid://7qgtkhvgbeei"]
+
+[ext_resource type="Theme" uid="uid://bov1r1kgnfp4l" path="res://scenes/main_menu/main_menu_theme.tres" id="1_wgorq"]
+[ext_resource type="SpriteFrames" uid="uid://c0ghyb648d68b" path="res://scenes/tree/tree1_frames.tres" id="2_fr6oe"]
+[ext_resource type="Script" path="res://scenes/main_menu/MainMenu.cs" id="2_x771w"]
+[ext_resource type="Texture2D" uid="uid://b54cea7bo5631" path="res://textures/characters/old_man/32x32.png" id="3_d87q1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_he45t"]
+atlas = ExtResource("3_d87q1")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6kgh"]
+atlas = ExtResource("3_d87q1")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvosu"]
+atlas = ExtResource("3_d87q1")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q673p"]
+atlas = ExtResource("3_d87q1")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6anb"]
+atlas = ExtResource("3_d87q1")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1s27d"]
+atlas = ExtResource("3_d87q1")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xyro3"]
+atlas = ExtResource("3_d87q1")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2p8pj"]
+atlas = ExtResource("3_d87q1")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1gws5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_he45t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6kgh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nvosu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q673p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nvosu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6kgh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_he45t")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x6anb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s27d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xyro3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2p8pj")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[node name="main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_wgorq")
+script = ExtResource("2_x771w")
+
+[node name="bg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.518633, 0.288944, 1)
+
+[node name="sprite2" type="AnimatedSprite2D" parent="."]
+position = Vector2(457, 180)
+rotation = -0.469438
+scale = Vector2(2.29662, 2.29662)
+sprite_frames = ExtResource("2_fr6oe")
+animation = &"idle"
+
+[node name="TItle" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 19.0
+offset_top = -134.0
+offset_right = 453.0
+offset_bottom = -90.0
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 31
+bbcode_enabled = true
+text = "CAPITALIST JOE"
+fit_content = true
+
+[node name="sub" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 68.0
+offset_top = -81.0
+offset_right = 502.0
+offset_bottom = -37.0
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "AND THE GREEN SOLUTION"
+fit_content = true
+
+[node name="instructions" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 48.0
+offset_top = -23.0
+offset_right = 482.0
+offset_bottom = 46.0
+grow_vertical = 2
+theme_override_constants/line_separation = 10
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "WASD: Move
+SPACE (hold): PLACE BUILDINGS
+LMB: THROW MOLITOV"
+fit_content = true
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(555, 208)
+scale = Vector2(7.1875, 7.1875)
+sprite_frames = SubResource("SpriteFrames_1gws5")
+animation = &"move"
+autoplay = "idle"
+frame = 2
+frame_progress = 0.79197
+
+[node name="play_btn" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 52.0
+offset_top = 77.0
+offset_right = 148.0
+offset_bottom = 102.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Play"
+
+[node name="exit_btn" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 171.0
+offset_top = 77.0
+offset_right = 267.0
+offset_bottom = 102.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Exit
+"
+
+[connection signal="pressed" from="play_btn" to="." method="onPlayPressed"]
+[connection signal="pressed" from="exit_btn" to="." method="onExitPressed"]

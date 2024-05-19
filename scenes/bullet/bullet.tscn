@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://df7bebg7bexcy"]
+
+[ext_resource type="SpriteFrames" uid="uid://p8d87xt502bp" path="res://scenes/bullet/bullet_frames.tres" id="1_xp5ue"]
+[ext_resource type="Script" path="res://scenes/bullet/Bullet.cs" id="2_f25xp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_frp5q"]
+radius = 3.0
+
+[node name="bullet" type="RigidBody2D"]
+position = Vector2(-188, 167)
+collision_layer = 8
+collision_mask = 8
+mass = 0.01
+gravity_scale = 0.0
+lock_rotation = true
+max_contacts_reported = 1
+contact_monitor = true
+linear_damp_mode = 1
+script = ExtResource("2_f25xp")
+
+[node name="shape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_frp5q")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.34289, 0.34289)
+sprite_frames = ExtResource("1_xp5ue")
+animation = &"idle"
+
+[node name="despawn_timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true

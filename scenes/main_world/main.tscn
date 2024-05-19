@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://5bdeb37htiqq"]
+[gd_scene load_steps=15 format=3 uid="uid://5bdeb37htiqq"]
 
 [ext_resource type="Script" path="res://global_scripts/GameController.cs" id="1_q7rpw"]
 [ext_resource type="Texture2D" uid="uid://d08vdtya8bh7d" path="res://textures/terrain/forest/gentle sheets/gentle forest v02.png" id="1_s5wge"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b4n5y3m77y2aw" path="res://scenes/tree/tree.tscn" id="4_8hf6g"]
 [ext_resource type="PackedScene" uid="uid://6ijxhdadbhsf" path="res://scenes/hq/building.tscn" id="4_ay0mv"]
 [ext_resource type="Texture2D" uid="uid://cljnun5kl7q24" path="res://textures/plants/trees/Large Spruce Tree/GREEN_TEAL/Sprites/Large Spruce Tree - GREEN_TEAL - 0000.png" id="5_wy7br"]
+[ext_resource type="Script" path="res://global_scripts/Spawner.cs" id="7_4lmfb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qmvku"]
 texture = ExtResource("1_s5wge")
@@ -245,6 +246,30 @@ texture_region_size = Vector2i(18, 16)
 sources/0 = SubResource("TileSetAtlasSource_qmvku")
 sources/1 = SubResource("TileSetAtlasSource_v47n7")
 
+[sub_resource type="Curve2D" id="Curve2D_s8aaf"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -1168, -789, 0, 0, 0, 0, 881, -821)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_u7e6a"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1012, -785, 0, 0, 0, 0, 1020, 821)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_m0fix"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 933, 944, 0, 0, 0, 0, -1219, 915)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_ak02s"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -1462, 896, 0, 0, 0, 0, -1462, -808)
+}
+point_count = 2
+
 [node name="main" type="Node2D"]
 script = ExtResource("1_q7rpw")
 
@@ -260,13 +285,103 @@ layer_1/tile_data = PackedInt32Array(3211214, 1, 0, 3473352, 1, 0, 2883528, 1, 0
 position = Vector2(19, 143)
 
 [node name="tree" parent="." instance=ExtResource("4_8hf6g")]
-position = Vector2(-393, 26)
+position = Vector2(-230, 39)
 
 [node name="hq" parent="." instance=ExtResource("4_ay0mv")]
 position = Vector2(6, 37)
 
-[node name="border_trees" type="Node" parent="."]
+[node name="spawner_rail1" type="Path2D" parent="."]
+curve = SubResource("Curve2D_s8aaf")
 
-[node name="tree2" type="Sprite2D" parent="border_trees"]
-position = Vector2(-671, -687)
-texture = ExtResource("5_wy7br")
+[node name="spawner1" type="PathFollow2D" parent="spawner_rail1"]
+position = Vector2(-1168, -789)
+rotation = -0.0156161
+script = ExtResource("7_4lmfb")
+
+[node name="spawner2" type="PathFollow2D" parent="spawner_rail1"]
+position = Vector2(-1168, -789)
+rotation = -0.0156161
+script = ExtResource("7_4lmfb")
+
+[node name="spawner3" type="PathFollow2D" parent="spawner_rail1"]
+position = Vector2(-1168, -789)
+rotation = -0.0156161
+script = ExtResource("7_4lmfb")
+
+[node name="spawner4" type="PathFollow2D" parent="spawner_rail1"]
+position = Vector2(-1168, -789)
+rotation = -0.0156161
+script = ExtResource("7_4lmfb")
+
+[node name="spawner_rail2" type="Path2D" parent="."]
+curve = SubResource("Curve2D_u7e6a")
+
+[node name="spawner1" type="PathFollow2D" parent="spawner_rail2"]
+position = Vector2(1012, -785)
+rotation = 1.56582
+script = ExtResource("7_4lmfb")
+
+[node name="spawner2" type="PathFollow2D" parent="spawner_rail2"]
+position = Vector2(1012, -785)
+rotation = 1.56582
+script = ExtResource("7_4lmfb")
+
+[node name="spawner3" type="PathFollow2D" parent="spawner_rail2"]
+position = Vector2(1012, -785)
+rotation = 1.56582
+script = ExtResource("7_4lmfb")
+
+[node name="spawner4" type="PathFollow2D" parent="spawner_rail2"]
+position = Vector2(1012, -785)
+rotation = 1.56582
+script = ExtResource("7_4lmfb")
+
+[node name="spawner_rail3" type="Path2D" parent="."]
+curve = SubResource("Curve2D_m0fix")
+
+[node name="spawner1" type="PathFollow2D" parent="spawner_rail3"]
+position = Vector2(933, 944)
+rotation = -3.12812
+script = ExtResource("7_4lmfb")
+
+[node name="spawner2" type="PathFollow2D" parent="spawner_rail3"]
+position = Vector2(933, 944)
+rotation = -3.12812
+script = ExtResource("7_4lmfb")
+
+[node name="spawner3" type="PathFollow2D" parent="spawner_rail3"]
+position = Vector2(933, 944)
+rotation = -3.12812
+script = ExtResource("7_4lmfb")
+
+[node name="spawner4" type="PathFollow2D" parent="spawner_rail3"]
+position = Vector2(933, 944)
+rotation = -3.12812
+script = ExtResource("7_4lmfb")
+
+[node name="spawner_rail4" type="Path2D" parent="."]
+curve = SubResource("Curve2D_ak02s")
+
+[node name="spawner1" type="PathFollow2D" parent="spawner_rail4"]
+position = Vector2(-1462, 896)
+rotation = -1.5708
+script = ExtResource("7_4lmfb")
+
+[node name="spawner2" type="PathFollow2D" parent="spawner_rail4"]
+position = Vector2(-1462, 896)
+rotation = -1.5708
+script = ExtResource("7_4lmfb")
+
+[node name="spawner3" type="PathFollow2D" parent="spawner_rail4"]
+position = Vector2(-1462, 896)
+rotation = -1.5708
+script = ExtResource("7_4lmfb")
+
+[node name="spawner4" type="PathFollow2D" parent="spawner_rail4"]
+position = Vector2(-1462, 896)
+rotation = -1.5708
+script = ExtResource("7_4lmfb")
+
+[node name="spawn_rotation_timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
